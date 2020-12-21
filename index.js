@@ -24,6 +24,7 @@ checks.forEach(function(current, index, array){
 });
 
 
+
 function checkIndex(event){
     for (var i =  0; i < checks.length; i++){
         if (checks[i] === event.target) {
