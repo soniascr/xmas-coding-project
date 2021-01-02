@@ -16,7 +16,7 @@ let gameBoard = [
     [1, 1, 1, 1, 0, 0, 0, 0, 0, 0]
 ];
 
-// this function and the next one listenfor a click in a specific cell and return the index. So we get a list node with the index of every cell.
+// this function and the next one listen for a click in a specific cell and return the index. So we get a list node with the index of every cell.
 var checks = document.querySelectorAll('.bg-light');
 
 checks.forEach(function (check) {
@@ -27,29 +27,14 @@ function checkIndex(event) {
     for (var i = 0; i < checks.length; i++) {
         if (checks[i] === event.target) {
             fireTorpedo(gameBoard, getElementRow(i), getElementCol(i), event.target);
-            //alert(i + ", Row: " +getElementRow(i) + ", Col: " + getElementCol(i));
             return i;
         }
     }
     return -1;
-    //console.log(Array.from(checks).indexOf(event.target) );
+  
 }
 
 // This function takes the index of the cell from the last function and will return position in row and col.
-/*function getElementPosition(index){
-    let cols = 9;
-    index = checkIndex();
-
-    let rowPosition = Math.floor(index / cols);
-    let colPosition = Math.ceil(index % cols);
-
-    //Return an object with properties row and column
-    return { row: rowPosition, column: colPosition } ;
-    return rowPosition, colPosition;
-}
-console.log(getElementsPosition(checkIndex))*/
-
-
 function getElementRow(index) {
     let cols = 9;
     return Math.floor(index / cols);
@@ -60,34 +45,29 @@ function getElementCol(index) {
     return Math.ceil(index % cols);
 }
 
+
+//This function should change the colour of clicked cell to red or gray.
 function fireTorpedo(arr, a, b, target) {
-    alert(target);
-    if (target==null) {
-        let el=b*9+a;
-        alert(el);
+    if (target == null) {
+        let el = b*9 + a;
         var checks = document.querySelectorAll('.bg-light');
-        target=checks[el];
-        alert(checks[el]);
+        target = checks[el];
     }
 
-
-    if (arr[a][b] === 1) {
+    else if (arr[a][b] === 1) {
         arr[a].splice(b, 1, 2);
-        // alert ("sunken ship")
-        target.style.backgroundColor = "red";
-        target.innerHTML = "r";
+        target.style.background = "red";
+        //target.innerHTML = "red";
     } else {
         arr[a].splice(b, 1, 3);
-        // alert ("missed ship")
         target.style.backgroundColor = "grey";
-        target.innerHTML = "g";
+        //target.innerHTML = "grey";
 
     }
     return arr;
 }
 
-//console.log(fireTorpedo(gameBoard, getElementRow(), getElementCol()));
-
+// Work in progress para añadir la funcionalidad del botón.
 document.querySelector("#fire").addEventListener('click', fireButton);
 
 function fireButton() {
